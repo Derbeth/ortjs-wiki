@@ -1,0 +1,44 @@
+{
+  "name": "ort-wiki",
+  "version": "0.4.0",
+  "description": "Adapter exposing OrtJS as a MediaWiki editor button",
+  "homepage": "http://tools.wikimedia.pl/~derbeth/ort/",
+  "author": "Piotr Kubowicz <derbeth@interia.pl> (https://github.com/Derbeth)",
+  "contributors": [],
+  "keywords": [
+    "spelling",
+    "ortography",
+    "Polish",
+    "MediaWiki"
+  ],
+  "main": "./ort-button.js",
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Derbeth/ortjs-wiki.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Derbeth/ortjs-wiki/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ort": "~0.1.1"
+  },
+  "devDependencies": {
+    "jshint": "~2.9.2",
+    "jasmine-core": "~2.4.1",
+    "karma": "~0.13.22",
+    "karma-coverage": "~0.5.5",
+    "karma-firefox-launcher": "~0.1.7",
+    "karma-jasmine": "~0.3.8",
+    "karma-phantomjs-launcher": "~1.0.0",
+    "karma-spec-reporter": "~0.0.25",
+    "phantomjs-prebuilt": "~2.1.7"
+  },
+  "scripts": {
+    "check": "jshint ort-button.js test/*.js",
+    "test": "npm run check && karma start --single-run"
+  }
+}
