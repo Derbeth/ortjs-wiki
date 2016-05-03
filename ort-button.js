@@ -46,6 +46,7 @@
         if (wpOrt.fixText()) {
             console.log('Fixed spelling');
             wpOrt.putSummary();
+            document.getElementById('wpSummary').scrollIntoView();
         } else {
             console.log('Spelling ok');
         }
