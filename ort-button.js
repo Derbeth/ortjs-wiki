@@ -43,9 +43,12 @@
         if (wpOrt.wasRunOnThisPage()) {
             wpOrt.updateSettingsFromPrompt(prompt("Parametry poprawiania ortografii", JSON.stringify(wpOrt.settings)));
         }
-        wpOrt.fixText();
-        console.log('Fixed spelling');
-        wpOrt.putSummary();
+        if (wpOrt.fixText()) {
+            console.log('Fixed spelling');
+            wpOrt.putSummary();
+        } else {
+            console.log('Spelling ok');
+        }
         ++wpOrt.runCount;
     };
 
@@ -63,7 +66,10 @@
 
     wpOrt.fixText = function() {
         var textarea = document.getElementById('wpTextbox1');
-        textarea.value = new Ort(wpOrt.settings).fix(textarea.value);
+        var oldText = textarea.value;
+        var newText = new Ort(wpOrt.settings).fix(oldText);
+        textarea.value = newText;
+        return oldText !== newText;
     };
 
     wpOrt.putSummary = function() {

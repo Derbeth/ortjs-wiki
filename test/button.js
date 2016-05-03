@@ -22,9 +22,10 @@
         });
         describe("fixText", function() {
             var rootElement;
+            var textarea;
             beforeEach(function() {
                 rootElement = document.createElement('div');
-                var textarea = document.createElement('textarea');
+                textarea = document.createElement('textarea');
                 textarea.setAttribute('id', 'wpTextbox1');
                 textarea.textContent = '5-tego maja';
                 rootElement.appendChild(textarea);
@@ -35,7 +36,14 @@
             });
             it("sets fixed text in the input", function() {
                 wpOrt.fixText();
-                expect(rootElement.querySelector('textarea').value).toEqual('5 maja');
+                expect(textarea.value).toEqual('5 maja');
+            });
+            it("returns true if text was changed", function() {
+                expect(wpOrt.fixText()).toBeTruthy();
+            });
+            it("returns false if text was not changed", function() {
+                textarea.textContent = 'everything all right';
+                expect(wpOrt.fixText()).toBeFalsy();
             });
         });
         describe("migrateSettings()", function() {
