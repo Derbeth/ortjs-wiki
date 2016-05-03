@@ -76,14 +76,11 @@
     wpOrt.putSummary = function() {
         var sumText = '[[User:Derbeth/ort|automat. popr. pisowni]]';
         var el=document.getElementById('wpSummary');
-        el.style.border='';
         if (el.value.indexOf(sumText) === -1) {
             if (el.value!=='') {
                 el.value+=', ';
             }
             el.value += sumText;
-            el=document.getElementById('wpDiff');
-            el.className = 'warning';
         }
     };
 
