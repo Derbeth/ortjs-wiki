@@ -6,7 +6,6 @@
     wpOrt.OLD_ICON = '//upload.wikimedia.org/wikipedia/commons/9/9a/Button_wiktionary.png';
     wpOrt.NEW_ICON = '//commons.wikimedia.org/w/thumb.php?f=Veckans_samarbete.svg&width=22px';
     wpOrt.BUTTON_ID = 'wpOrtButton';
-    wpOrt.runCount = 0;
 
     wpOrt.start = function() {
         wpOrt.migrateSettings();
@@ -27,39 +26,38 @@
                 wpOrt.icon = wpOrt.OLD_ICON;
             }
             toolbarGadget.addButton({
-                title: 'Poprawianie pisowni (wersja ' + wpOrt.ver + ')',
+                title: 'Poprawianie pisowni ' + wpOrt.ver + ' (kliknij trzymając Shift by wywołać z innymi opcjami)',
                 alt: 'Ort',
                 id: wpOrt.BUTTON_ID,
                 oldIcon: wpOrt.OLD_ICON,
                 newIcon: wpOrt.NEW_ICON,
-                onclick: function() {
-                    wpOrt.runOrt();
+                onclick: function(evt) {
+                    wpOrt.runOrt(evt.shiftKey);
                 }
             });
         });
     };
 
-    wpOrt.runOrt = function() {
-        if (wpOrt.wasRunOnThisPage()) {
+    wpOrt.runOrt = function(askForOptions) {
+        if (askForOptions) {
             wpOrt.updateSettingsFromPrompt(prompt("Parametry poprawiania ortografii", JSON.stringify(wpOrt.settings)));
         }
         if (wpOrt.fixText()) {
             console.log('Fixed spelling');
             wpOrt.putSummary();
             document.getElementById('wpSummary').scrollIntoView();
+            document.getElementById('wpDiff').focus();
         } else {
             console.log('Spelling ok');
         }
-        ++wpOrt.runCount;
-    };
-
-    wpOrt.wasRunOnThisPage = function() {
-        return wpOrt.runCount > 0;
     };
 
     wpOrt.updateSettingsFromPrompt = function(userSettings) {
         try {
-            wpOrt.settings = JSON.parse(userSettings);
+            var newSettings = JSON.parse(userSettings);
+            if (newSettings) {
+                wpOrt.settings = newSettings;
+            }
         } catch(e) {
             console.log('Invalid input', e.message);
         }
