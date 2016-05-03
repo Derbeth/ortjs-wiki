@@ -76,6 +76,9 @@
     wpOrt.putSummary = function() {
         var sumText = '[[User:Derbeth/ort|automat. popr. pisowni]]';
         var el=document.getElementById('wpSummary');
+        if (!el.value) {
+            document.getElementById('wpMinoredit').checked = true;
+        }
         if (el.value.indexOf(sumText) === -1) {
             if (el.value!=='') {
                 el.value+=', ';
@@ -105,10 +108,10 @@
         wpOrt.settings = oldSettings;
     };
 
-    if(attachToWindow) {
+    if (attachToWindow) {
         window.wpOrt = wpOrt;
     }
-    if(window.mw !== undefined) {
+    if (window.mw !== undefined) {
         wpOrt.start();
     }
 }(window.jasmine !== undefined));
