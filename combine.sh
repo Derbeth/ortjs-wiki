@@ -7,4 +7,5 @@ cat node_modules/ort/dist/ort.js >> dist/ort.js
 echo >> dist/ort.js
 echo >> dist/ort.js
 cat ort-button.js >> dist/ort.js
+chmod u-w dist/ort.js
 echo Generated to dist/ort.js
