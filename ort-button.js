@@ -46,7 +46,11 @@
             console.log('Fixed spelling');
             wpOrt.putSummary();
             document.getElementById('wpSummary').scrollIntoView();
-            document.getElementById('wpDiff').focus();
+            if (wpOrt.settings.immediateDiff) {
+                document.getElementById('wpDiff').click();
+            } else {
+                document.getElementById('wpDiff').focus();
+            }
         } else {
             console.log('Spelling ok');
         }
