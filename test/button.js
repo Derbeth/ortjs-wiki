@@ -69,7 +69,7 @@
                     window.wp_ort_settings = {"interp": 1, "typogr": 1, "br": 1, "kropki": 1, "ryzykowne": 1};
                     wpOrt.migrateSettings();
                     expect(wpOrt.settings).toEqual({"interpunction": 1, "typography": 1, "fixBrs": 1, "fixAmericanNumbers": 1,
-                        "risky": 1}); // TODO Roman numbers
+                        "risky": 1});
                 });
             });
             describe("with all old settings to false", function() {
