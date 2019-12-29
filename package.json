@@ -1,6 +1,6 @@
 {
   "name": "ort-wiki",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Adapter exposing OrtJS as a MediaWiki editor button",
   "homepage": "http://tools.wikimedia.pl/~derbeth/ort/",
   "author": "Piotr Kubowicz <derbeth@interia.pl> (https://github.com/Derbeth)",
