@@ -1,7 +1,7 @@
 (function(attachToWindow) {
     "use strict";
     var wpOrt = {};
-    wpOrt.ver = '0.4.0';
+    wpOrt.ver = '0.5.0';
 
     wpOrt.OLD_ICON = '//upload.wikimedia.org/wikipedia/commons/9/9a/Button_wiktionary.png';
     wpOrt.NEW_ICON = '//commons.wikimedia.org/w/thumb.php?f=Veckans_samarbete.svg&width=22px';
@@ -31,7 +31,7 @@
                 id: wpOrt.BUTTON_ID,
                 oldIcon: wpOrt.OLD_ICON,
                 newIcon: wpOrt.NEW_ICON,
-                onclick: function(evt) {
+                onclick: function(elem, evt) {
                     wpOrt.runOrt(evt.shiftKey);
                 }
             });
@@ -71,7 +71,7 @@
         var textarea = document.getElementById('wpTextbox1');
         var oldText = textarea.value;
         var newText = new Ort(wpOrt.settings).fix(oldText);
-        textarea.value = newText;
+        $('#wpTextbox1').textSelection('setContents', newText);
         return oldText !== newText;
     };
 

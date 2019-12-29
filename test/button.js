@@ -23,11 +23,28 @@
         describe("fixText", function() {
             var rootElement;
             var textarea;
+            var editorText;
+            beforeEach(function() {
+                window.$ = function() {
+                    return {
+                        textSelection: function(command, options) {
+                            if (command === 'setContents') {
+                                editorText = options;
+                            } else {
+                                throw new Error("Unexpected command: " + command);
+                            }
+                        }
+                    };
+                };
+            });
+            afterEach(function() {
+                delete window.$;
+            });
             beforeEach(function() {
                 rootElement = document.createElement('div');
                 textarea = document.createElement('textarea');
                 textarea.setAttribute('id', 'wpTextbox1');
-                textarea.textContent = '5-tego maja';
+                textarea.textContent = editorText = '5-tego maja';
                 rootElement.appendChild(textarea);
                 document.body.appendChild(rootElement);
             });
@@ -36,7 +53,7 @@
             });
             it("sets fixed text in the input", function() {
                 wpOrt.fixText();
-                expect(textarea.value).toEqual('5 maja');
+                expect(editorText).toEqual('5 maja');
             });
             it("returns true if text was changed", function() {
                 expect(wpOrt.fixText()).toBeTruthy();
